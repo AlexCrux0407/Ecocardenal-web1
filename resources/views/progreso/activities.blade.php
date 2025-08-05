@@ -26,9 +26,37 @@
                 <tbody>
                     @foreach ($activities as $activity)
                         <tr class="hover-bg">
-                            <td>{{ ucfirst($activity->activity_type) }}</td>
+                            <td>
+                                @php
+                                    $iconClass = '';
+                                    switch($activity->activity_type) {
+                                        case 'quiz':
+                                            $iconClass = 'fa-question-circle text-primary';
+                                            break;
+                                        case 'game':
+                                            $iconClass = 'fa-gamepad text-success';
+                                            break;
+                                        case 'trivia':
+                                            $iconClass = 'fa-brain text-info';
+                                            break;
+                                        case 'manualidades':
+                                            $iconClass = 'fa-paint-brush text-warning';
+                                            break;
+                                        case 'historias':
+                                            $iconClass = 'fa-book text-secondary';
+                                            break;
+                                        case 'experimentos':
+                                            $iconClass = 'fa-flask text-danger';
+                                            break;
+                                        default:
+                                            $iconClass = 'fa-check-circle text-muted';
+                                    }
+                                @endphp
+                                <i class="fas {{ $iconClass }} mr-2"></i>
+                                {{ ucfirst($activity->activity_type) }}
+                            </td>
                             <td>{{ $activity->activity_name }}</td>
-                            <td>{{ $activity->points }}</td>
+                            <td><span class="badge bg-success">+{{ $activity->points }}</span></td>
                             <td>{{ \Carbon\Carbon::parse($activity->completed_at)->format('d/m/Y H:i') }}</td>
                         </tr>
                     @endforeach

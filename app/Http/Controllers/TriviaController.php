@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Helpers\LogHelper;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class TriviaController extends Controller
 {
@@ -136,7 +138,7 @@ class TriviaController extends Controller
             \DB::table('ranking')->updateOrInsert(
                 ['usuario_id' => $userId],
                 [
-                    'total_points' => \DB::raw('total_points + ' . $score),
+                    'total_points' => \DB::raw('total_points + ' . ($score ?: 0)),
                     'updated_at' => now(),
                 ]
             );

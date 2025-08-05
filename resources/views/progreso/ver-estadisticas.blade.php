@@ -2,6 +2,10 @@
 
 @section('title', 'Ver Estadísticas')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/estadisticas.css') }}">
+@endpush
+
 @section('content')
 <div class="section container py-5 bg-white shadow-sm rounded" style="max-width: 900px; margin: 0 auto;">
     <h2 class="text-center mb-4">Estadísticas de tu Progreso</h2>
@@ -16,10 +20,11 @@
         <div class="progress" style="height: 20px;">
             <div class="progress-bar progress-bar-striped bg-success" 
                  role="progressbar" 
-                 style="width: {{ $porcentajeCompletado }}%" 
+                 style="width: {{ $porcentajeCompletado }}%;" 
                  aria-valuenow="{{ $porcentajeCompletado }}" 
                  aria-valuemin="0" 
                  aria-valuemax="100">
+                {{ $porcentajeCompletado }}%
             </div>
         </div>
     </div>
@@ -58,10 +63,27 @@
     </div>
 
     <!-- Additional Stats -->
-    <div class="text-center mb-4">
-        <div class="alert alert-info">
-            <h4><i class="fas fa-bullseye"></i> Meta: 1000 puntos</h4>
-            <p>Llevas {{ $puntosTotales }} de 1000 puntos necesarios</p>
+    <div class="row mb-4">
+        <div class="col-md-12 mb-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-trophy"></i> Logros</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Logros desbloqueados</span>
+                        <a href="{{ route('progreso.logros') }}" class="btn btn-sm btn-outline-success">Ver todos</a>
+                    </div>
+                    <div class="progress mb-2" style="height: 20px;">
+                        <div class="progress-bar bg-success" role="progressbar" 
+                             style="width: {{ $logrosDesbloqueados / max($totalLogros, 1) * 100 }}%;" 
+                             aria-valuenow="{{ $logrosDesbloqueados }}" aria-valuemin="0" aria-valuemax="{{ $totalLogros }}">
+                            {{ number_format($logrosDesbloqueados / max($totalLogros, 1) * 100, 0) }}%
+                        </div>
+                    </div>
+                    <p class="mb-0">{{ $logrosDesbloqueados }} de {{ $totalLogros }} logros desbloqueados</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -79,8 +101,10 @@
 <!-- Optional: Add animation to progress bar -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const progressBar = document.querySelector('.progress-bar');
-    progressBar.style.transition = 'width 1.5s ease-in-out';
+    const progressBars = document.querySelectorAll('.progress-bar');
+    progressBars.forEach(function(bar) {
+        bar.style.transition = 'width 1.5s ease-in-out';
+    });
 });
 </script>
 

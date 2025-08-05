@@ -23,13 +23,6 @@
             </a>
         </li>
         <li class="col">
-            <a href="{{ route('progreso.metas') }}"
-                class="d-flex align-items-center p-4 border rounded-3 shadow-sm bg-white text-dark text-decoration-none hover-shadow">
-                <i class="fas fa-bullseye fa-3x me-3"></i>
-                <span>Metas</span>
-            </a>
-        </li>
-        <li class="col">
             <a href="{{ route('progreso.activities') }}"
                 class="d-flex align-items-center p-4 border rounded-3 shadow-sm bg-white text-dark text-decoration-none hover-shadow">
                 <i class="fas fa-check-circle fa-3x me-3"></i>

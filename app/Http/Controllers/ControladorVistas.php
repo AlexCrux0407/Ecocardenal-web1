@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Faltaba esta importación
 use Illuminate\Support\Facades\DB; 
 use Illuminate\Support\Facades\Session;  // Faltaba esta importación
+use Illuminate\Support\Facades\Log;
 
 class ControladorVistas extends Controller
 {

@@ -12,6 +12,12 @@
             {{ session('success') }}
         </div>
     @endif
+    
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <form action="{{ route('historias.store') }}" method="POST" class="form-story mb-5">
         @csrf

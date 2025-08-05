@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\CompletedActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
 {

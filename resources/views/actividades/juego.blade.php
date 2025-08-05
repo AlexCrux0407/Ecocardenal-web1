@@ -15,6 +15,10 @@
 
     <div class="game-controls d-flex justify-content-center">
         <button id="restart-button" class="btn btn-primary btn-lg mt-4 mx-2">Reiniciar Juego</button>
+        <form action="{{ route('juego.finish') }}" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" id="complete-button" class="btn btn-success btn-lg mt-4 mx-2">Completar Juego</button>
+        </form>
         <a href="{{ route('actividades') }}" class="btn btn-outline-secondary btn-lg mt-4 mx-2">Volver a Actividades</a>
     </div>
 </div>

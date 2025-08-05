@@ -67,9 +67,11 @@ Route::prefix('actividades')->group(function () {
     
     // Juegos
     Route::get('/juego', [JuegoController::class, 'index'])->name('juego.index');
+    Route::post('/juego/finish', [JuegoController::class, 'finishGame'])->name('juego.finish');
     
     // Manualidades
     Route::get('/manualidades', [ManualidadesController::class, 'index'])->name('manualidades.index');
+    Route::post('/manualidades/completar', [ManualidadesController::class, 'completarManualidad'])->name('manualidades.completar');
     
     // Historias
     Route::get('/historias', [HistoriasController::class, 'index'])->name('historias.index');
@@ -80,9 +82,8 @@ Route::prefix('actividades')->group(function () {
 // Rutas de progreso
 Route::prefix('progreso')->group(function () {
     Route::get('/', [ControladorVistas::class, 'progreso'])->name('progreso');
-    Route::get('/estadisticas', [ControladorVistas::class, 'verEstadisticas'])->name('progreso.estadisticas');
-    Route::get('/logros', [ControladorVistas::class, 'logros'])->name('progreso.logros');
-    Route::get('/metas', [ControladorVistas::class, 'metas'])->name('progreso.metas');
+    Route::get('/estadisticas', [ProgresoController::class, 'estadisticas'])->name('progreso.estadisticas');
+    Route::get('/logros', [ProgresoController::class, 'logros'])->name('progreso.logros');
     Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
     Route::get('/actividades', [ProgresoController::class, 'activities'])->name('progreso.activities');
 });
@@ -92,6 +93,12 @@ Route::prefix('configuracion')->group(function () {
     Route::get('/', [ControladorVistas::class, 'configuracion'])->name('configuracion');
     Route::get('/InfoUsuario', [InfoUsuarioController::class, 'index'])->name('informacionUsuario');
     Route::put('/usuarioUpdate/{id}', [InfoUsuarioController::class, 'update'])->name('ActualizarUsuario');
+});
+
+// Rutas de administración
+Route::prefix('admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+    Route::post('/reset-logros', [App\Http\Controllers\AdminController::class, 'resetLogros'])->name('admin.reset-logros');
 });
 
 // API Routes

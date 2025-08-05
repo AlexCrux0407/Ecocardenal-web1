@@ -2,10 +2,16 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+    ],
     server: {
-    https: true,
-    hmr: {
-      host: '3fc51f1e02da.ngrok-free.app'
-    }
-  },
+        https: true,
+        hmr: {
+            host: '3fc51f1e02da.ngrok-free.app'
+        }
+    },
 });

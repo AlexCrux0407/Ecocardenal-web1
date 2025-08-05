@@ -72,6 +72,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (cardsWon.length === cardArray.length / 2) {
             alert('¡Felicidades! Encontraste todas las parejas.');
+            
+            // Registrar el juego como completado
+            fetch('/actividades/juego/finish', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    completed: true
+                })
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error al registrar el juego:', error);
+            });
         }
     }
 
